@@ -1,0 +1,26 @@
+html{
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    color: blue;
+}
+#gameboard{
+    background-image: url("../Content/images/background.png");
+    height: 450px;
+    width: 1200px;
+    display: block;
+    position: relative;
+    margin-top: -225px;
+    margin-left: -600px;
+    left: 50%;
+    top: 50%;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    box-shadow: 0 10px 20px black;
+    overflow: hidden;
+}
+
