@@ -1,26 +1,142 @@
-html{
-    padding: 0;
+html {
     margin: 0;
+    padding: 0;
 }
 
-body{
+body {
+    background: rgb(143, 146, 158); /* Old browsers */
+    background: radial-gradient(ellipse at center, rgba(143, 146, 158, 1) 0%, rgba(60, 70, 73, 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    background-attachment: fixed;
     color: blue;
-}
-#gameboard{
-    background-image: url("../Content/images/background.png");
-    height: 450px;
-    width: 1200px;
-    display: block;
-    position: relative;
-    margin-top: -225px;
-    margin-left: -600px;
-    left: 50%;
-    top: 50%;
+    margin: 0;
+    overflow: auto;
+    padding: 0;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-    box-shadow: 0 10px 20px black;
-    overflow: hidden;
+    font-family: initial;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 8em;
+    text-align: center;
+    vertical-align: middle;
 }
 
+#main_container {
+    height: 100%;
+    margin: auto;
+    width: 100%;
+}
+
+#currentplayerindicator{
+    display: block;
+}
+
+p{
+    position: relative;
+    top: 125px;
+    display: block;
+    font-size: 0.5em;
+    line-height: 0;
+    margin: 0;
+}
+
+#gameboard {
+    background-image: url("/Content/images/background.png");
+    box-shadow: 0 10px 20px black;
+    display: block;
+    height: 450px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    top: 200px;
+    width: 1400px;
+    border-radius: 10px;
+}
+
+.fieldcontainer {
+    display: flex;
+    height: 50%;
+    padding: 25px;
+    width: 100%;
+}
+
+#p1fieldcontainer {
+    justify-content: flex-start;
+    padding-top: 0;
+}
+
+#p2fieldcontainer {
+    justify-content: flex-end;
+    padding-bottom: 0;
+}
+
+.kalaha {
+    background-color: rgba(0, 0, 0, 0.20);
+    border-radius: 75px;
+    box-shadow: inset 0 10px 40px black;
+    height: 400px;
+    position: relative;
+    width: 150px;
+    line-height: 400px;
+}
+
+#p1kalaha {
+    bottom: 225px;
+}
+
+#p2kalaha {
+    right: 50px;
+}
+
+.holecontainer {
+    display: flex;
+}
+
+.p1hole {
+    background-color: rgba(0, 0, 0, 0.10);
+    border-radius: 75px;
+    box-shadow: inset 0 10px 40px black;
+    height: 150px;
+    margin: 0 10px 0 10px;
+    width: 150px;
+}
+
+.p2hole {
+    background-color: rgba(0, 0, 0, 0.10);
+    border-radius: 75px;
+    box-shadow: inset 0 10px 40px black;
+    height: 150px;
+    margin: 0 10px 0 10px;
+    width: 150px;
+}
+
+.p1hole a{
+    display: block;
+    border-radius: 75px;
+    width: 150px;
+    height: 150px;
+}
+
+.p2hole a{
+    display: block;
+    border-radius: 75px;
+    width: 150px;
+    height: 150px;
+}
+
+a:hover{
+    cursor: pointer;
+}
+
+#p1holecontainer {
+    bottom: 0;
+    left: 15px;
+    position: relative;
+}
+
+#p2holecontainer {
+    position: relative;
+    right: 65px;
+    top: 20px;
+}

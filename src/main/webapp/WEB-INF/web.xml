@@ -12,12 +12,11 @@
 
     <servlet-mapping>
         <servlet-name>MancalaServlet</servlet-name>
-        <url-pattern></url-pattern>
+        <url-pattern>/mancalaServlet</url-pattern>
     </servlet-mapping>
 
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
-        <welcome-file>default.jsp</welcome-file>
+        <welcome-file>/WEB-INF/redirectToIndex.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
 

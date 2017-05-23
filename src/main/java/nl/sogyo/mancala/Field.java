@@ -7,6 +7,7 @@ public abstract class Field {
     private int stones;
     private Field neighbour;
     private Player owner;
+    private boolean gameOver = false;
 
     protected void takeOneAndPassOn(int stonesLeft) {
         stones++;
@@ -30,6 +31,7 @@ public abstract class Field {
         sweepRemainingStones(initialField, receivingKalaha);
         Player winner = determineWinner();
         printWinner(winner);
+        neighbour.setGameOver(this);
     }
 
     protected Field findInactiveKalaha() {
@@ -42,7 +44,7 @@ public abstract class Field {
         if (!neighbour.equals(initialField)) neighbour.sweepRemainingStones(initialField, receivingKalaha);
     }
 
-    Player determineWinner() {
+    private Player determineWinner() {
         Player winner = null;
         Kalaha firstKalaha = (Kalaha) findMyKalaha();
         Kalaha secondKalaha = (Kalaha) firstKalaha.getNeighbour().findMyKalaha();
@@ -53,7 +55,6 @@ public abstract class Field {
 
     private void printWinner(Player winner) {
         System.out.println(winner == null ? "Game has been tied. No winner found." : winner.getName() + " has won the game.");
-
     }
 
     abstract protected Field findMyKalaha();
@@ -84,4 +85,19 @@ public abstract class Field {
         if (owner == null) owner = setOwner;
     }
 
+    public boolean isGameOver() {
+        return this.gameOver;
+    }
+
+    public Player getWinner() {
+        return determineWinner();
+    }
+
+    private void setGameOver(Field initialField) {
+        gameOver = true;
+        if (this == initialField) {
+            return;
+        }
+        neighbour.setGameOver(initialField);
+    }
 }
