@@ -14,7 +14,6 @@
     <title>Mancala</title>
 </head>
 <body>
-<% GameState currentGameState = (GameState) session.getAttribute("currentGameState");%>
 <div id="main_container">
     <div id="currentplayerindicator">
         <p>
@@ -34,64 +33,67 @@
             <div class="holecontainer" id="p2holecontainer">
                 <div class="p2hole"><a
                         onclick="javascript:location.href='${pageContext.request.contextPath}mancalaServlet?hole=13'">
-
-                    <%=currentGameState.getStonesOfHole(13)%>
+                    <c:out value="${sessionScope.stonesInFields[12]}"/>
                 </a></div>
                 <div class="p2hole"><a
                         onclick="javascript:location.href='${pageContext.request.contextPath}mancalaServlet?hole=12'">
-                    <%=currentGameState.getStonesOfHole(12)%>
+                    <c:out value="${sessionScope.stonesInFields[11]}"/>
                 </a></div>
                 <div class="p2hole"><a
                         onclick="javascript:location.href='${pageContext.request.contextPath}mancalaServlet?hole=11'">
-                    <%=currentGameState.getStonesOfHole(11)%>
+                    <c:out value="${sessionScope.stonesInFields[10]}"/>
                 </a></div>
                 <div class="p2hole"><a
                         onclick="javascript:location.href='${pageContext.request.contextPath}mancalaServlet?hole=10'">
-                    <%=currentGameState.getStonesOfHole(10)%>
+                    <c:out value="${sessionScope.stonesInFields[9]}"/>
                 </a></div>
                 <div class="p2hole"><a
                         onclick="javascript:location.href='${pageContext.request.contextPath}mancalaServlet?hole=9'">
-                    <%=currentGameState.getStonesOfHole(9)%>
+                    <c:out value="${sessionScope.stonesInFields[8]}"/>
                 </a></div>
                 <div class="p2hole"><a
                         onclick="javascript:location.href='${pageContext.request.contextPath}mancalaServlet?hole=8'">
-                    <%=currentGameState.getStonesOfHole(8)%>
+                    <c:out value="${sessionScope.stonesInFields[7]}"/>
                 </a></div>
             </div>
-            <div class="kalaha" id="p2kalaha"><%=currentGameState.getStonesOfHole(7)%>
+            <div class="kalaha" id="p2kalaha"><c:out value="${sessionScope.stonesInFields[6]}"/>
             </div>
         </div>
         <div class="fieldcontainer" id="p1fieldcontainer">
-            <div class="kalaha" id="p1kalaha"><%=currentGameState.getStonesOfHole(14)%>
+            <div class="kalaha" id="p1kalaha"><c:out value="${sessionScope.stonesInFields[13]}"/>
             </div>
             <div class="holecontainer" id="p1holecontainer">
                 <div class="p2hole"><a
                         onclick="javascript:location.href='${pageContext.request.contextPath}mancalaServlet?hole=1'">
-                    <%=currentGameState.getStonesOfHole(1)%>
+                    <c:out value="${sessionScope.stonesInFields[0]}"/>
                 </a></div>
                 <div class="p2hole"><a
                         onclick="javascript:location.href='${pageContext.request.contextPath}mancalaServlet?hole=2'">
-                    <%=currentGameState.getStonesOfHole(2)%>
+                    <c:out value="${sessionScope.stonesInFields[1]}"/>
                 </a></div>
                 <div class="p2hole"><a
                         onclick="javascript:location.href='${pageContext.request.contextPath}mancalaServlet?hole=3'">
-                    <%=currentGameState.getStonesOfHole(3)%>
+                    <c:out value="${sessionScope.stonesInFields[2]}"/>
                 </a></div>
                 <div class="p2hole"><a
                         onclick="javascript:location.href='${pageContext.request.contextPath}mancalaServlet?hole=4'">
-                    <%=currentGameState.getStonesOfHole(4)%>
+                    <c:out value="${sessionScope.stonesInFields[3]}"/>
                 </a></div>
                 <div class="p2hole"><a
                         onclick="javascript:location.href='${pageContext.request.contextPath}mancalaServlet?hole=5'">
-                    <%=currentGameState.getStonesOfHole(5)%>
+                    <c:out value="${sessionScope.stonesInFields[4]}"/>
                 </a></div>
                 <div class="p2hole"><a
                         onclick="javascript:location.href='${pageContext.request.contextPath}mancalaServlet?hole=6'">
-                    <%=currentGameState.getStonesOfHole(6)%>
+                    <c:out value="${sessionScope.stonesInFields[5]}"/>
                 </a></div>
             </div>
         </div>
     </div>
+    <c:if test="${sessionScope.isGameOver == true}">
+        <p>Refresh the page to play another game.</p>
+        <c:remove var="currentGameState" scope="session"/>
+    </c:if>
 </div>
 </body>
 </html>

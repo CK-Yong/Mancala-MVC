@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
@@ -29,16 +31,22 @@ public class MancalaServlet extends HttpServlet {
         int clickedHole = getClickedHole(request);
         GameState currentGameState = (GameState) session.getAttribute("currentGameState");
 
+
         if (clickedHole > 0) {
             playHole(currentGameState, clickedHole);
         }
 
-        session.setAttribute("isGameOver", currentGameState.isGameOver());
+        List<Integer> stonesInFields = new ArrayList<Integer>();
+        for(int i = 1; i<=14; i++){
+            stonesInFields.add(currentGameState.getStonesOfHole(i));
+        }
 
         if (currentGameState.isGameOver()) {
             setAttributesForGameOver(session, currentGameState);
         }
 
+        session.setAttribute("stonesInFields",stonesInFields);
+        session.setAttribute("isGameOver", currentGameState.isGameOver());
         session.setAttribute("getActivePlayer", currentGameState.getActivePlayer().getName());
         request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }
