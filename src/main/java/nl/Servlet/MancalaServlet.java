@@ -26,6 +26,10 @@ public class MancalaServlet extends HttpServlet {
         HttpSession session = request.getSession();
         if (session.getAttribute("currentGameState") == null) {
             initiateNewGame(session);
+            GameState currentGameState = (GameState) session.getAttribute("currentGameState");
+            generateAndSetAttributes(session, currentGameState);
+            request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+            return;
         }
 
         int clickedHole = getClickedHole(request);
@@ -33,11 +37,16 @@ public class MancalaServlet extends HttpServlet {
 
 
         if (clickedHole > 0) {
-            playHole(currentGameState, clickedHole);
+            currentGameState.playHole(clickedHole);
         }
 
+        generateAndSetAttributes(session, currentGameState);
+        request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+    }
+
+    private void generateAndSetAttributes(HttpSession session, GameState currentGameState) {
         List<Integer> stonesInFields = new ArrayList<Integer>();
-        for(int i = 1; i<=14; i++){
+        for (int i = 1; i <= 14; i++) {
             stonesInFields.add(currentGameState.getStonesOfHole(i));
         }
 
@@ -45,10 +54,9 @@ public class MancalaServlet extends HttpServlet {
             setAttributesForGameOver(session, currentGameState);
         }
 
-        session.setAttribute("stonesInFields",stonesInFields);
+        session.setAttribute("stonesInFields", stonesInFields);
         session.setAttribute("isGameOver", currentGameState.isGameOver());
         session.setAttribute("getActivePlayer", currentGameState.getActivePlayer().getName());
-        request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }
 
     private void initiateNewGame(HttpSession session) {
@@ -61,11 +69,6 @@ public class MancalaServlet extends HttpServlet {
             clickedHole = Integer.parseInt(request.getParameter("hole"));
         }
         return clickedHole;
-    }
-
-    private GameState playHole(GameState currentState, int hole) {
-        currentState.playHole(hole);
-        return currentState;
     }
 
     private void setAttributesForGameOver(HttpSession session, GameState currentGameState) {

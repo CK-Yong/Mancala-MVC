@@ -8,18 +8,22 @@ body {
     background: radial-gradient(ellipse at center, rgba(143, 146, 158, 1) 0%, rgba(60, 70, 73, 1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     background-attachment: fixed;
     color: blue;
+    font-family: initial;
+    font-size: 8em;
     margin: 0;
     overflow: auto;
     padding: 0;
+    text-align: center;
+    vertical-align: middle;
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-    font-family: initial;
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 8em;
-    text-align: center;
-    vertical-align: middle;
+}
+
+#content_wrapper{
+    position: relative;
+    top: 125px;
 }
 
 #main_container {
@@ -28,30 +32,42 @@ body {
     width: 100%;
 }
 
-#currentplayerindicator{
-    display: block;
+span{
+    font-size: 0.5em;
+    line-height: 0;
+    margin: 0;
+
+    background-color: #4c1f00;
+    color: transparent;
+    text-shadow: 0 2px 3px rgba(255,255,255,0.5);
+    -webkit-background-clip: text;
+    background-clip: text;
 }
 
-p{
-    position: relative;
-    top: 125px;
+#currentplayerindicator{
+    display: block;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+#currentplayerindicator span{
     display: block;
     font-size: 0.5em;
     line-height: 0;
     margin: 0;
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 2px 2px 2px black;
 }
-
 #gameboard {
     background-image: url("/Content/images/background.png");
+    border-radius: 10px;
     box-shadow: 0 10px 20px black;
     display: block;
     height: 450px;
     margin: auto;
     overflow: hidden;
     position: relative;
-    top: 200px;
     width: 1400px;
-    border-radius: 10px;
 }
 
 .fieldcontainer {
@@ -76,57 +92,32 @@ p{
     border-radius: 75px;
     box-shadow: inset 0 10px 40px black;
     height: 400px;
+    line-height: 400px;
     position: relative;
     width: 150px;
-    line-height: 400px;
 }
 
-#p1kalaha {
-    bottom: 225px;
+.kalaha span{
+    line-height: 400px;
+    font-size: 1em;
+    background-color: #4c1f00;
+    color: transparent;
+    text-shadow: 0 2px 3px rgba(255,255,255,0.5);
+    -webkit-background-clip: text;
+    background-clip: text;
+    cursor: default;
 }
 
 #p2kalaha {
+    bottom: 225px;
+}
+
+#p1kalaha {
     right: 50px;
 }
 
 .holecontainer {
     display: flex;
-}
-
-.p1hole {
-    background-color: rgba(0, 0, 0, 0.10);
-    border-radius: 75px;
-    box-shadow: inset 0 10px 40px black;
-    height: 150px;
-    margin: 0 10px 0 10px;
-    width: 150px;
-}
-
-.p2hole {
-    background-color: rgba(0, 0, 0, 0.10);
-    border-radius: 75px;
-    box-shadow: inset 0 10px 40px black;
-    height: 150px;
-    margin: 0 10px 0 10px;
-    width: 150px;
-}
-
-.p1hole a{
-    display: block;
-    border-radius: 75px;
-    width: 150px;
-    height: 150px;
-}
-
-.p2hole a{
-    display: block;
-    border-radius: 75px;
-    width: 150px;
-    height: 150px;
-}
-
-a:hover{
-    cursor: pointer;
 }
 
 #p1holecontainer {
@@ -139,4 +130,80 @@ a:hover{
     position: relative;
     right: 65px;
     top: 20px;
+}
+
+.active {
+    background-color: rgba(0, 0, 0, 0.10);
+    border-radius: 75px;
+    box-shadow: inset 0 10px 40px black;
+    height: 150px;
+    margin: 0 10px 0 10px;
+    width: 150px;
+}
+
+.active a{
+    border-radius: 75px;
+    display: block;
+    height: 150px;
+    width: 150px;
+}
+
+.inactive {
+    background-color: rgba(0, 0, 0, 0.70);
+    border-radius: 75px;
+    box-shadow: inset 0 10px 40px black;
+    height: 150px;
+    margin: 0 10px 0 10px;
+    width: 150px;
+    pointer-events: none;
+}
+
+.inactive a{
+    border-radius: 75px;
+    display: block;
+    height: 150px;
+    width: 150px;
+    pointer-events: none;
+
+    background-color: #4c1f00;
+    color: transparent;
+    text-shadow: 0 2px 3px rgba(255,255,255,0.2);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+a:hover{
+    cursor: pointer;
+}
+
+.inactive a:hover{
+    cursor: default;
+}
+
+a {
+    background-color: #4c1f00;
+    color: transparent;
+    text-shadow: 0 2px 3px rgba(255,255,255,0.5);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+#refreshmessage{
+    font-size: 0.3em;
+    height: 50px;
+    margin-top: 55px;
+}
+
+#refreshmessage span{
+    color: white;
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 2px 2px 2px black;
+}
+
+#refreshmessage span a{
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+    text-shadow: 2px 2px 2px black;
 }
