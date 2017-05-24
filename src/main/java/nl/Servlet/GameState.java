@@ -56,5 +56,4 @@ public class GameState {
     public Player getWinner(){
         return field1.getWinner();
     }
-
 }

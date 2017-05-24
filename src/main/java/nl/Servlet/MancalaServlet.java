@@ -24,6 +24,7 @@ public class MancalaServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+
         if (session.getAttribute("currentGameState") == null) {
             initiateNewGame(session);
             GameState currentGameState = (GameState) session.getAttribute("currentGameState");
@@ -34,7 +35,6 @@ public class MancalaServlet extends HttpServlet {
 
         int clickedHole = getClickedHole(request);
         GameState currentGameState = (GameState) session.getAttribute("currentGameState");
-
 
         if (clickedHole > 0) {
             currentGameState.playHole(clickedHole);
@@ -49,11 +49,9 @@ public class MancalaServlet extends HttpServlet {
         for (int i = 1; i <= 14; i++) {
             stonesInFields.add(currentGameState.getStonesOfHole(i));
         }
-
         if (currentGameState.isGameOver()) {
             setAttributesForGameOver(session, currentGameState);
         }
-
         session.setAttribute("stonesInFields", stonesInFields);
         session.setAttribute("isGameOver", currentGameState.isGameOver());
         session.setAttribute("getActivePlayer", currentGameState.getActivePlayer().getName());

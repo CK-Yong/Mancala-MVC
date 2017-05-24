@@ -18,7 +18,6 @@
                     <c:out value="${sessionScope.getActivePlayer}"/>'s turn.
                 </c:otherwise>
             </c:choose>
-
         </span>
         </div>
         <div id="gameboard">
