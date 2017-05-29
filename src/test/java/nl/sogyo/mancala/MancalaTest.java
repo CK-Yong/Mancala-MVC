@@ -248,13 +248,5 @@ public class MancalaTest {
         Assert.assertEquals(24, field7.getStones());
         Assert.assertEquals(1, field14.getStones());
     }
-
-    @Test
-    public void testIfField7isWinnerIfMoreStones() {
-        field7.setStones(10);
-        field14.setStones(0);
-        Player winner = field7.determineWinner();
-        Assert.assertEquals(field7.getOwner(), winner);
-    }
 }
 
