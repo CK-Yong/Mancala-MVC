@@ -1,13 +1,22 @@
 package nl.Servlet;
+
 import nl.sogyo.mancala.*;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by ckyoung on 23-May-17.
  */
-public class GameState {
+public class GameState implements Serializable {
     private Hole field1, field2, field3, field4, field5, field6, field8, field9, field10, field11, field12, field13;
     private Kalaha field7, field14;
     private Field[] gameBoard;
+    private List<Integer> stonesInFieldList;
+    private boolean gameOver;
+    private String activePlayer;
+    private String winner;
 
     public GameState() {
         gameBoard = initializeGameBoard();
@@ -32,28 +41,40 @@ public class GameState {
         return gameBoard;
     }
 
-    public int getStonesOfHole(int requestedField){
-        return gameBoard[requestedField-1].getStones();
+    public int getStonesOfHole(int requestedField) {
+        return gameBoard[requestedField - 1].getStones();
     }
 
-    public GameState playHole(int input){
-        Hole holeToPlay = (Hole) gameBoard[input-1];
+    public GameState playHole(int input) {
+        Hole holeToPlay = (Hole) gameBoard[input - 1];
         holeToPlay.play();
         return this;
     }
 
-    public Player getActivePlayer(){
-        if(field1.getOwner().isActive()){
-            return field1.getOwner();
+    public String getActivePlayer() {
+        Player firstPlayer = field1.getOwner();
+        activePlayer = firstPlayer.isActive() ? firstPlayer.getName() : firstPlayer.getOpponent().getName();
+        return activePlayer;
+    }
+
+    public boolean isGameOver() {
+        gameOver = field1.isGameOver();
+        return gameOver;
+    }
+
+    public String getWinner() {
+        winner = field1.getWinner().getName();
+        if (winner == null) {
+            return "Game is tied";
         }
-        return field8.getOwner();
+        return winner + " wins!";
     }
 
-    public boolean isGameOver(){
-        return field1.isGameOver();
-    }
-
-    public Player getWinner(){
-        return field1.getWinner();
+    public List getStonesInFieldList() {
+        stonesInFieldList = new ArrayList<Integer>();
+        for (Field field : gameBoard) {
+            stonesInFieldList.add(field.getStones());
+        }
+        return stonesInFieldList;
     }
 }

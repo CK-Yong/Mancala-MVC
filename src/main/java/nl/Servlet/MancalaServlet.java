@@ -24,58 +24,35 @@ public class MancalaServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
+        GameState currentGameState = (GameState) session.getAttribute("gameState");
 
-        if (session.getAttribute("currentGameState") == null) {
-            initiateNewGame(session);
-            GameState currentGameState = (GameState) session.getAttribute("currentGameState");
-            generateAndSetAttributes(session, currentGameState);
+        if (session.getAttribute("gameState") == null) {
+            currentGameState = new GameState();
+            session.setAttribute("gameState", currentGameState);
             request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
-            return;
+            return; //prevents game from playing automatically upon refresh
         }
 
         int clickedHole = getClickedHole(request);
-        GameState currentGameState = (GameState) session.getAttribute("currentGameState");
 
-        if (clickedHole > 0) {
+        if (clickedHole > 0 & clickedHole < 14) {
             currentGameState.playHole(clickedHole);
         }
 
-        generateAndSetAttributes(session, currentGameState);
+        session.setAttribute("gameState", currentGameState);
         request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }
 
-    private void generateAndSetAttributes(HttpSession session, GameState currentGameState) {
-        List<Integer> stonesInFields = new ArrayList<Integer>();
-        for (int i = 1; i <= 14; i++) {
-            stonesInFields.add(currentGameState.getStonesOfHole(i));
-        }
-        if (currentGameState.isGameOver()) {
-            setAttributesForGameOver(session, currentGameState);
-        }
-        session.setAttribute("stonesInFields", stonesInFields);
-        session.setAttribute("isGameOver", currentGameState.isGameOver());
-        session.setAttribute("getActivePlayer", currentGameState.getActivePlayer().getName());
-    }
-
-    private void initiateNewGame(HttpSession session) {
-        session.setAttribute("currentGameState", new GameState());
-    }
 
     private int getClickedHole(HttpServletRequest request) {
         int clickedHole = 0;
         if (request.getParameter("hole") != null) {
-            clickedHole = Integer.parseInt(request.getParameter("hole"));
+            try {
+                clickedHole = Integer.parseInt(request.getParameter("hole"));
+            } catch (NumberFormatException e) {
+                clickedHole = 0;
+            }
         }
         return clickedHole;
     }
-
-    private void setAttributesForGameOver(HttpSession session, GameState currentGameState) {
-        if (currentGameState.getWinner() != null) {
-            session.setAttribute("getWinner", currentGameState.getWinner().getName());
-        } else {
-            session.setAttribute("getWinner", "Game is tied.");
-        }
-    }
-
-
 }
