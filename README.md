@@ -1,9 +1,5 @@
-# Mancala MVC-opdracht
+# Mancala MVC
 
-Gebruik deze repo om je MVC-versie van Mancala in te leveren.
+An example of how to implement an existing domain into an MVC. This implementation can be deployed on a server through packing it into a .war file. It can be run on a jetty server by using the Maven command `mvn jetty:run`
 
-# Maven en Jetty
-
-Maven is in dit project zo geconfigureerd dat het automatisch een Jetty instantie zal starten met jouw .war-file erin. Het commando daarvoor is: `mvn jetty:run`.
-
-Deze plugin gebruikt de configuratie van de `web.xml` om jouw applicatie correct op te starten.
+![Mancala Screenshot](http://imgur.com/eIaZ8cT)
